@@ -23,8 +23,7 @@ public class LoginUserTests {
         RestAssured.baseURI = BASE_URL;
 
         User user = new User("PadmeAmidala", "Padme-data@yandex.ru", "padmeAmidala");
-        UserClient userClient = new UserClient();
-        userClient.create(user);
+        UserClient.create(user);
     }
 
     @Test

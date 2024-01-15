@@ -26,8 +26,7 @@ public class GetListOrderTests {
         RestAssured.baseURI = BASE_URL;
 
         User user = new User("PadmeAmidala", "Padme-data@yandex.ru", "padmeAmidala");
-        UserClient userClient = new UserClient();
-        userClient.create(user);
+        UserClient.create(user);
 
         Response loginResponse = UserClient.login(fromUser(user));
         accessToken = loginResponse.path("accessToken");

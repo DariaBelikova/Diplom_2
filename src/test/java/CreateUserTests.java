@@ -31,9 +31,7 @@ public class CreateUserTests {
 
         User user = new User("Hermione", "Hermione-data@yandex.ru", "hermione");
 
-        UserClient userClient = new UserClient();
-
-        Response response = userClient.create(user);
+        Response response = UserClient.create(user);
 
         accessToken = response.path("accessToken");
         assertEquals("Неверный статус код", SC_OK, response.statusCode());
@@ -46,12 +44,10 @@ public class CreateUserTests {
     public void checkDoubleCreateNewUser() {
 
         User user = new User("Hermione", "Hermione-data@yandex.ru", "hermione");
-
-        UserClient userClient = new UserClient();
-        Response response = userClient.create(user);
+        Response response = UserClient.create(user);
         accessToken = response.path("accessToken");
 
-        Response responseSecondUser = userClient.create(user);
+        Response responseSecondUser = UserClient.create(user);
 
         responseSecondUser.then().assertThat().statusCode(SC_FORBIDDEN)
                 .and()
@@ -65,8 +61,7 @@ public class CreateUserTests {
     public void checkCreateUserWithoutPassword() {
         User courierWithoutPassword = new User("HermioneGranger", "", "Hermione");
 
-        UserClient userClient = new UserClient();
-        Response response = userClient.create(courierWithoutPassword);
+        Response response = UserClient.create(courierWithoutPassword);
 
         response.then().assertThat().statusCode(SC_FORBIDDEN)
                 .and()
